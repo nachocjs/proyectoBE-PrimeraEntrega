@@ -30,7 +30,9 @@ class ProductManager {
       const products = JSON.parse(fileData);
 
       const newId = this.generateNewId(products);
-      const product = { id: newId, ...newProduct };
+      const product = { id: newId,
+                       ...newProduct,
+                        status: true, };
       products.push(product);
 
       await fs.promises.writeFile(this.pathFile, JSON.stringify(products, null, 2), "utf-8");

@@ -23,9 +23,14 @@ app.get("/api/products", async(req, res)=> {
 //POST Add Product
 app.post("/api/products", async(req, res) => {
   try {
-    const newProduct = req.body;
-    const products = await productManager.addProduct(newProduct);
-    res.status(201).json({ status : "success", products });
+        const { title, description, code, price, stock, category, thumbnails } = req.body;
+        if (!title || !description || !code || !price || !stock || !category) {
+            return res.status(400).json({ error: 'Todos los campos son obligatorios excepto thumbnails' });
+        }
+
+        const newProduct = await productManager.addProduct({ title, description, code, price, stock, category, thumbnails })
+
+        res.status(201).json({status : "success", newProduct})
   } catch (error) {
     res.status(500).json({ status: "error" });
   }
