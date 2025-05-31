@@ -76,7 +76,41 @@ app.get("/api/products/:pid", async(req, res)=> {
 app.post("/api/carts", async(req, res) => {
   try {
     const carts = await cartManager.newCart();
-    res.status(201).json({ status : "success", products });
+    res.status(201).json({ status : "success", carts });
+  } catch (error) {
+    res.status(500).json({ status: "error" });
+  }
+});
+
+//POST Add Product Cart
+app.post("/api/carts/:cid/products/:pid", async (req, res) => {
+  try {
+    const cartId = req.params.cid;  
+    const productId = req.params.pid; 
+    const { quantity } = req.body;   
+
+    if (!quantity || quantity <= 0) {
+      return res.status(400).json({ status: "error", message: "Debe ingresar un número valido" });
+    }
+
+    
+    const updatedCart = await cartManager.addProductInCart(parseInt(cartId), parseInt(productId), parseInt(quantity));
+
+    res.status(200).json({ status: "success", updatedCart });
+  } catch (error) {
+    console.error("Error al agregar el producto al carrito:", error);
+    res.status(500).json({ status: "error", message: error.message });
+  }
+});
+
+
+//GET Cart Products By Id
+app.get("/api/carts/:cid", async(req, res)=> {
+  try {
+    const cartId = req.params.cid;
+    const products = await cartManager.getCartProductsById(cartId);
+
+    res.status(200).json({ status: "success", products });
   } catch (error) {
     res.status(500).json({ status: "error" });
   }
