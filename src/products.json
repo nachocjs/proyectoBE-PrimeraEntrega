@@ -1,16 +1,28 @@
 [
   {
     "id": 1,
-    "title": "Intel core i7 8700k   ",
-    "description": "Procesador intel",
-    "code": "da46",
-    "price": 1500,
-    "stock": 32,
+    "title": "Intel  8700k   ",
+    "description": "Procesador",
+    "code": "sd7",
+    "price": 1100,
+    "stock": 3,
     "category": "Cpu",
-    "thumbnails": " "
+    "thumbnails": " ",
+    "status": true
   },
   {
     "id": 2,
+    "title": "Intel core i7 8700k   ",
+    "description": "Procesador intel",
+    "code": "da46",
+    "price": 15200,
+    "stock": 32,
+    "category": "Cpu",
+    "thumbnails": " ",
+    "status": true
+  },
+  {
+    "id": 3,
     "title": "Intel  8700k   ",
     "description": "Procesador",
     "code": "sd7",
